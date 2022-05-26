@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseFirestoreSwift
 
 class DetailViewController: UIViewController {
 
@@ -26,10 +28,34 @@ class DetailViewController: UIViewController {
             titleLabel.text = displayMovie.title
             yearLabel.text = String(displayMovie.year)
             durationLabel.text = String(displayMovie.duration)
+            
+            print(movie?.id)
         }
     }
     
+    @IBAction func onSave(_ sender: Any) {
+        (sender as! UIBarButtonItem).title = "Loading..."
 
+        let db = Firestore.firestore()
+
+        movie!.title = titleLabel.text!
+        movie!.year = Int32(yearLabel.text!)! //good code would check this is an int
+        movie!.duration = Float(durationLabel.text!)! //good code would check this is a float
+        do
+        {
+            //update the database (code from lectures)
+            try db.collection("movies").document(movie!.id!).setData(from: movie!){ err in
+                if let err = err {
+                    print("Error updating document: \(err)")
+                } else {
+                    print("Document successfully updated")
+                    //this code triggers the unwind segue manually
+                    self.performSegue(withIdentifier: "saveSegue", sender: sender)
+                }
+            }
+        } catch { print("Error updating document \(error)") } //note "error" is a magic variable
+    }
+    
     /*
     // MARK: - Navigation
 

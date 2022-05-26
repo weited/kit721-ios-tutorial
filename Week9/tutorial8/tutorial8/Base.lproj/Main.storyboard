@@ -16,46 +16,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y2C-W9-GRy">
-                                <rect key="frame" x="148" y="92" width="97" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="y2C-W9-GRy">
+                                <rect key="frame" x="20" y="92" width="374" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QJ4-Y3-i4h">
-                                <rect key="frame" x="137" y="181" width="97" height="34"/>
+                                <rect key="frame" x="20" y="181" width="374" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fyY-aZ-c1C">
-                                <rect key="frame" x="163" y="386" width="67" height="31"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JfC-kq-kJF">
+                                <rect key="frame" x="20" y="269" width="374" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wnZ-9a-9Pk">
+                                <rect key="frame" x="146" y="350" width="123" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Cancel"/>
+                                <connections>
+                                    <segue destination="5OR-18-cFw" kind="unwind" unwindAction="unwindToMovieListWithCancelWithSender:" id="rGO-Lf-Tie"/>
+                                </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JfC-kq-kJF">
-                                <rect key="frame" x="137" y="269" width="97" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="vTz-Cs-fIG"/>
+                    <navigationItem key="navigationItem" id="vTz-Cs-fIG">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="pPA-fa-ovQ">
+                            <connections>
+                                <action selector="onSave:" destination="BYZ-38-t0r" id="Jnw-jq-r7I"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="durationLabel" destination="JfC-kq-kJF" id="Am4-qE-AOb"/>
                         <outlet property="titleLabel" destination="y2C-W9-GRy" id="rw6-Is-Vzm"/>
                         <outlet property="yearLabel" destination="QJ4-Y3-i4h" id="qU1-Fb-KK1"/>
+                        <segue destination="5OR-18-cFw" kind="unwind" identifier="saveSegue" unwindAction="unwindToMovieListWithSender:" id="LHR-pN-8JR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="5OR-18-cFw" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1644.9275362318842" y="272.54464285714283"/>
         </scene>
-        <!--Movies-->
+        <!--MovieUI Table View Controller-->
         <scene sceneID="hX0-1a-DEp">
             <objects>
                 <tableViewController id="rSq-ql-QCG" customClass="MovieUITableViewController" customModule="tutorial8" customModuleProvider="target" sceneMemberID="viewController">
@@ -100,7 +111,7 @@
                             <outlet property="delegate" destination="rSq-ql-QCG" id="LQg-ny-fBT"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Movies" id="jWd-DQ-qOe"/>
+                    <navigationItem key="navigationItem" id="jWd-DQ-qOe"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X7c-Lq-KLB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -12,6 +12,20 @@ class MovieUITableViewController: UITableViewController {
 
     var movies = [Movie]()
     
+    @IBAction func unwindToMovieList(sender: UIStoryboardSegue)
+    {
+        //we could reload from db, but lets just trust the local movie object
+        if let detailScreen = sender.source as? DetailViewController
+        {
+            movies[detailScreen.movieIndex!] = detailScreen.movie!
+            tableView.reloadData()
+        }
+    }
+
+    @IBAction func unwindToMovieListWithCancel(sender: UIStoryboardSegue)
+    {
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
